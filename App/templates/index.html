@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Kelayakan Pinjaman</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediksi Kelayakan Pinjaman</h1>
+        <form action="/predict" method="post">
+            <div>
+                <label for="Age">Usia:</label>
+                <input type="number" id="Age" name="Age" min="17" max="100" required>
+            </div>
+            <div>
+                <label for="Income">Pendapatan (Rp.):</label>
+                <input type="number" id="Income" name="Income" min="1000000" required>
+            </div>
+            <div>
+                <label for="LoanAmount">Jumlah Pinjaman (Rp.):</label>
+                <input type="number" id="LoanAmount" name="LoanAmount" min="0" step="500000" required>
+            </div>
+            <div>
+                <label for="CreditScore">Skor Kredit:</label>
+                <input type="number" id="CreditScore" name="CreditScore" min="0" step="100" required>
+            </div>
+            <div>
+                <label for="MonthsEmployed">Lama Bekerja (Bulan):</label>
+                <input type="number" id="MonthsEmployed" name="MonthsEmployed" min="0" step="1" required>
+            </div>
+            <div>
+                <label for="NumCreditLines">Jumlah Akun Kredit:</label>
+                <input type="number" id="NumCreditLines" name="NumCreditLines" min="0" step="1" required>
+            </div>
+            <div>
+                <label for="InterestRate">Suku Bunga:</label>
+                <input type="number" id="InterestRate" name="InterestRate" min="0" step="1" required>
+            </div>
+            <div>
+                <label for="LoanTerm">Jangka Waktu Pinjaman (Bulan):</label>
+                <input type="number" id="LoanTerm" name="LoanTerm" min="0" step="1" required>
+            </div>
+            <div>
+                <label for="DTIRatio">Rasio DTI:</label>
+                <input type="number" id="DTIRatio" name="DTIRatio" min="0" step="1" required>
+            </div>
+            <div>
+                <label for="Education">Pendidikan:</label>
+                <select id="Education" name="Education" required>
+                  <option value="" selected disabled>Pilih</option>
+                    <option value="Bachelor's">Sarjana</option>
+                    <option value="Master's">Magister</option>
+                    <option value="High School">Sekolah Menengah Atas (SMA)</option>
+                    <option value="PhD">Doktor</option>
+                </select>
+            </div>
+            <div>
+                <label for="EmploymentType">Jenis Pekerjaan:</label>
+                <select id="EmploymentType" name="EmploymentType" required>
+                  <option value="" selected disabled>Pilih</option>
+                    <option value="Full-time">Pekerja Penuh Waktu</option>
+                    <option value="Unemployed">Pengangguran</option>
+                    <option value="Self-employed">Wiraswasta</option>
+                    <option value="Part-time">Pekerja Paruh Waktu</option>
+                </select>
+            </div>
+            <div>
+                <label for="MaritalStatus">Status Perkawinan:</label>
+                <select id="MaritalStatus" name="MaritalStatus" required>
+                  <option value="" selected disabled>Pilih</option>
+                    <option value="Divorced">Bercerai</option>
+                    <option value="Married">Menikah</option>
+                    <option value="Single">Lajang</option>
+                </select>
+            </div>
+            <div>
+                <label for="HasMortgage">Memiliki Hipotek:</label>
+                <select id="HasMortgage" name="HasMortgage" required>
+                  <option value="" selected disabled>Pilih</option>
+                    <option value="Yes">Ya</option>
+                    <option value="No">Tidak</option>
+                </select>
+            </div>
+            <div>
+                <label for="HasDependents">Memiliki Tanggungan:</label>
+                <select id="HasDependents" name="HasDependents" required>
+                  <option value="" selected disabled>Pilih</option>
+                    <option value="Yes">Ya</option>
+                    <option value="No">Tidak</option>
+                </select>
+            </div>
+            <div>
+                <label for="LoanPurpose">Tujuan Pinjaman:</label>
+                <select id="LoanPurpose" name="LoanPurpose" required>
+                  <option value="" selected disabled>Pilih</option>
+                    <option value="Other">Lainnya</option>
+                    <option value="Auto">Kendaraan</option>
+                    <option value="Business">Usaha</option>
+                    <option value="Home">Rumah</option>
+                    <option value="Education">Pendidikan</option>
+                </select>
+            </div>
+            <div>
+                <label for="HasCoSigner">Memiliki Penjamin:</label>
+                <select id="HasCoSigner" name="HasCoSigner" required>
+                  <option value="" selected disabled>Pilih</option>
+
+                    <option value="Yes">Ya</option>
+                    <option value="No">Tidak</option>
+                </select>
+            </div>
+            <div>
+              <a href="/predict"><button type="submit">Predict</button></a>
+            </div>
+        </form>
+        {% if prediction_text %}
+            <h2>Hasil Prediksi:</h2>
+            <p>{{ prediction_text }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
